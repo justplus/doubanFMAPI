@@ -1,0 +1,5 @@
+C:\Users\justminus\Desktop\doubanFMAPI\doubanFMAPI\bin\Debug\doubanFMAPI.dll
+C:\Users\justminus\Desktop\doubanFMAPI\doubanFMAPI\bin\Debug\doubanFMAPI.pdb
+C:\Users\justminus\Desktop\doubanFMAPI\doubanFMAPI\obj\Debug\doubanFMAPI.dll
+C:\Users\justminus\Desktop\doubanFMAPI\doubanFMAPI\obj\Debug\doubanFMAPI.pdb
+C:\Users\justminus\Desktop\doubanFMAPI\doubanFMAPI\obj\Debug\doubanFMAPI.csprojResolveAssemblyReference.cache

@@ -1,0 +1,309 @@
+﻿<Window x:Class="doubanFM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:db="clr-namespace:doubanFM"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="450" Width="280" WindowStyle="None" 
+        ResizeMode="NoResize" Title="豆瓣电台" WindowStartupLocation="CenterScreen" AllowsTransparency="True" FontFamily="Microsoft YaHei" FontSize="14" Icon="Logo.ico">
+    <Window.Resources>
+        <Storyboard x:Key="ShowVolume">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeImage" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="-30,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeSlider" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeSlider" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="40"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideVolume">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeImage" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="0,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeSlider" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_VolumeSlider" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowMoreFM">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_MoreFM" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_MoreFM" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="50"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideMoreFM">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_MoreFM" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_MoreFM" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowSongInfo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_SongPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ct_SongPanel">
+                <SplineThicknessKeyFrame KeyTime="0" Value="-20,0,20,0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_AlbumPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ct_AlbumPanel">
+                <SplineThicknessKeyFrame KeyTime="0" Value="-20,0,20,0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideSongInfo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_SongPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ct_SongPanel">
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="50,0,-50,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ct_AlbumPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ct_AlbumPanel">
+                <SplineThicknessKeyFrame KeyTime="0" Value="-20,0,20,0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="50,0,-50,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <db:IsLike2ImageConverter x:Key="isLike2Image"/>
+        <db:Array2StringConverter x:Key="array2String"/>
+        <db:StringFormatConverter x:Key="stringFormat"/>
+    </Window.Resources>
+    <Grid Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/background1.jpg" Opacity="0.9" Stretch="None" />
+        </Grid.Background>
+        <Canvas Name="TitlePanel" Grid.Row="0" Background="Transparent">
+            <Label Content="豆瓣电台" Canvas.Left="5" Canvas.Top="3" Foreground="White" FontWeight="Bold" FontSize="12"/>
+            <Image Name="ct_LoginImage" Source="Images/UnloginUser.png" Canvas.Left="65" Canvas.Top="11" Width="12" Height="12"/>
+            <Image Name="ct_ChangeBGImage" Source="Images/ChangeBG.png" Canvas.Right="60" Canvas.Top="10" Width="12" Height="12"/>
+            <Image Name="ct_MinusImage" Source="Images/Minus.png" Canvas.Right="40" Canvas.Top="5" Width="20" Height="20"/>
+            <Image Name="ct_TopImage" Source="Images/AlwaysTop.png" Canvas.Right="20" Canvas.Top="5" Width="20" Height="20"/>
+            <Image Name="ct_CloseImage" Source="Images/Close.png" Canvas.Right="0" Canvas.Top="5" Width="20" Height="20"/>
+        </Canvas>
+        <!--登陆界面-->
+        <Canvas Name="LoginPanel" Grid.Row="1" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.2"/>
+            </Canvas.Background>
+            <Label Content="使用豆瓣账户登陆" Canvas.Left="23" Canvas.Top="35" />
+            <Label Content="用户名" Canvas.Left="23" Canvas.Top="70" />
+            <Label Content="密   码" Canvas.Left="23" Canvas.Top="104" />
+            <Label Content="验证码" Canvas.Left="23" Canvas.Top="138" />
+            <TextBox Name="ct_UserName" Height="23" Canvas.Left="90" Canvas.Top="74" Width="177"/>
+            <PasswordBox Name="ct_Password" Canvas.Left="90" Canvas.Top="109" Width="177"/>
+            <TextBox Name="ct_Captcha" Height="23" Canvas.Left="90" Canvas.Top="141" Width="177"/>
+            <Image Name="ct_CaptchaImage" Height="39" Canvas.Left="90" Canvas.Top="179" Width="177"/>
+            <Button Name="ct_LoginButton" Content="登陆" Canvas.Left="47" Canvas.Top="273" Width="75"/>
+            <Button Name="ct_CancelLoginButton" Content="取消" Canvas.Left="166" Canvas.Top="273" Width="75"/>
+            <CheckBox Content="记住用户名密码(网吧慎用)" Canvas.Left="23" Canvas.Top="232" IsChecked="True"/>
+            <TextBlock Name="ct_LoginErrorMessage" Foreground="Red" Width="244" Canvas.Left="23" Canvas.Top="317" TextWrapping="Wrap"/>
+        </Canvas>
+        <!--已登录界面-->
+        <Canvas Name="UserInfoPanel" Grid.Row="1" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.2"/>
+            </Canvas.Background>
+            <StackPanel Canvas.Left="43" Canvas.Top="35" Orientation="Horizontal">
+                <Label Name="ct_LoginedUserName" Content="justplus" Background="#FF6A7960" Foreground="White"/>
+                <Label Content="欢迎回来！"/>
+            </StackPanel>
+            <Line Canvas.Left="44" Canvas.Top="63" X1="0" Y1="0" X2="0" Y2="166" StrokeThickness="1" Stroke="#FF6A7960"/>
+            <Line Canvas.Left="45" Canvas.Top="110" X1="0" Y1="0" X2="47" Y2="0" StrokeThickness="1" Stroke="#FF6A7960"/>
+            <Line Canvas.Left="45" Canvas.Top="169" X1="0" Y1="0" X2="47" Y2="0" StrokeThickness="1" Stroke="#FF6A7960"/>
+            <Line Canvas.Left="45" Canvas.Top="229" X1="0" Y1="0" X2="47" Y2="0" StrokeThickness="1" Stroke="#FF6A7960"/>
+            <StackPanel Canvas.Left="91" Canvas.Top="95" Orientation="Horizontal">
+                <Label Content="累计播放" Background="#FF6A7960" Foreground="White"/>
+                <Label Name="ct_Played" Content="8458"/>
+                <Label Content="首"/>
+            </StackPanel>
+            <StackPanel Canvas.Left="91" Canvas.Top="155" Orientation="Horizontal">
+                <Label Content="标记红心" Background="#FF6A7960" Foreground="White"/>
+                <Label Name="ct_Like" Content="8458"/>
+                <Label Content="首"/>
+            </StackPanel>
+            <StackPanel Canvas.Left="91" Canvas.Top="215" Orientation="Horizontal">
+                <Label Content="不再播放" Background="#FF6A7960" Foreground="White"/>
+                <Label Name="ct_Ban" Content="8458"/>
+                <Label Content="首"/>
+            </StackPanel>
+            <Button Name="ct_LogoutButton" Content="退出豆瓣" Canvas.Left="48" Canvas.Top="273" Width="75"/>
+            <Button Name="ct_CancelLogoutButton" Content="取消" Canvas.Left="166" Canvas.Top="273" Width="75"/>
+        </Canvas>
+        <!--播放界面-->
+        <Canvas Name="PlayerPanel" Grid.Row="1">
+            <MediaElement Name="ct_MediaPlayer" LoadedBehavior="Manual" />
+            <StackPanel Name="ct_SongPanel" Orientation="Horizontal" Canvas.Left="25" Canvas.Top="23" Background="Transparent">
+                <StackPanel.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <BeginStoryboard Storyboard="{StaticResource ShowMoreFM}"/>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <BeginStoryboard Storyboard="{StaticResource HideMoreFM}"/>
+                    </EventTrigger>
+                </StackPanel.Triggers>
+                <Label Name="ct_SongName" Foreground="White" FontSize="22" FontWeight="ExtraBold" MaxWidth="185"/>
+                <Canvas Name="ct_MoreFM" Width="0" Opacity="0" Visibility="Collapsed">
+                    <Image Name="ct_SingerFMImage" Source="Images/SingerFM.png" Canvas.Left="5" Canvas.Top="10" Width="20" Height="20" ToolTip="播放该歌手歌曲"/>
+                    <Image Name="ct_AlbumFMImage" Source="Images/AlbumFM.png" Canvas.Left="30" Canvas.Top="10" Width="20" Height="20" ToolTip="播放该专辑歌曲"/>
+                </Canvas>
+            </StackPanel>
+            <StackPanel Name="ct_AlbumPanel" Orientation="Horizontal" Canvas.Left="25" Canvas.Top="62">
+                <Label Name="ct_SingerName" Foreground="White" FontSize="14" MaxWidth="90"/>
+                <Label Name="ct_PublishTime" Foreground="White" FontSize="14"/>
+                <Label Name="ct_AlbumName" Foreground="White" FontSize="14" MaxWidth="120"/>
+            </StackPanel>
+            <Image Name="ct_AlbumPicture" Height="180" Canvas.Left="32" Canvas.Top="95" Width="180" Stretch="UniformToFill"/>
+            <Rectangle Canvas.Left="32" Canvas.Top="275" Width="{Binding Path=Width,ElementName=ct_AlbumPicture}" Height="{Binding Path=Height,ElementName=ct_AlbumPicture}">
+                <Rectangle.Fill>
+                    <VisualBrush Opacity="0.7" Stretch="None" Visual="{Binding ElementName=ct_AlbumPicture}">
+                        <VisualBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                                <TranslateTransform  Y="1" />
+                            </TransformGroup>
+                        </VisualBrush.RelativeTransform>
+                    </VisualBrush>
+                </Rectangle.Fill>
+                <Rectangle.OpacityMask>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#FF000000" Offset="0.0" />
+                        <GradientStop Color="#33000000" Offset="0.2" />
+                        <GradientStop Color="#00000000" Offset="0.3" />
+                    </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock Name="ct_Lyric" Canvas.Left="32" Canvas.Top="280" Width="180" Foreground="White" TextWrapping="Wrap" TextAlignment="Center" MaxHeight="40"/>
+            <Canvas Canvas.Left="25" Canvas.Top="320">
+                <Image Name="ct_LikeImage" Source="Images/UnLike.png" Width="25" Height="25" Canvas.Left="12"/>
+                <Image Name="ct_BanImage" Source="Images/Ban.png" Width="25" Height="25" Canvas.Left="77"/>
+                <Image Name="ct_NextImage" Source="Images/Next.png" Width="25" Height="25" Canvas.Left="132"/>
+                <StackPanel Canvas.Left="206" Canvas.Top="0" Orientation="Horizontal" Background="Transparent">
+                    <StackPanel.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <BeginStoryboard Storyboard="{StaticResource ShowVolume}"/>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <BeginStoryboard Storyboard="{StaticResource HideVolume}"/>
+                        </EventTrigger>
+                    </StackPanel.Triggers>
+                    <Image Name="ct_VolumeImage" Source="Images/Volume.png" Width="20" Height="20"/>
+                    <Slider Name="ct_VolumeSlider" Height="25" Width="0"  Value="0.5" Opacity="0" Maximum="1"/>
+                </StackPanel>
+            </Canvas>
+            <ProgressBar Name="ct_SongLoadProgress" Height="3" Canvas.Left="32" Canvas.Top="275" Width="180" Foreground="#FF20B849" Maximum="1"/>
+            <ProgressBar Name="ct_SongProgress" Height="3" Canvas.Left="32" Canvas.Top="275" Width="180" Background="Transparent" Foreground="Yellow" Maximum="1"/>
+            <Label Name="ct_SongTimeSpan" Canvas.Left="210" Canvas.Top="264" Foreground="White" FontSize="10" FontWeight="ExtraBlack"/>
+        </Canvas>
+        <Canvas Name="ChannelListPanel" Grid.Row="2">
+            <Image Name="ct_OpFavChannelImage" Source="Images/Favorite.png" Canvas.Left="5" Canvas.Top="20" Width="20" Height="20" />
+            <StackPanel Name="ct_ChannelStackPanel" Orientation="Horizontal"  Canvas.Top="15" Canvas.Left="30" Width="190">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0,0.5" MappingMode="RelativeToBoundingBox" StartPoint="1,0.5" Opacity="0.3">
+                        <GradientStop Color="Transparent" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <Label Name="ct_Channel" Content="华语" Foreground="White" FontWeight="ExtraBold" FontSize="16" MaxWidth="155"/>
+                <Label Content="MHz" Foreground="White" VerticalContentAlignment="Bottom" FontSize="12" Width="40"/>
+            </StackPanel>
+            <Image Name="ct_PlaylistImage" Source="Images/PlayList.png" Canvas.Left="225" Canvas.Top="15" Width="30" Height="30"/>
+        </Canvas>
+        <!--兆赫界面-->
+        <Canvas Name="ChannelPanel" Grid.Row="1" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.2"/>
+            </Canvas.Background>
+            <StackPanel Name="ct_HotChPanel" Orientation="Horizontal" Canvas.Left="10" Canvas.Top="8">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="#FFFF1700" Opacity="0.5"/>
+                </StackPanel.Background>
+                <Image Source="Images/Hot.png" Width="20" Height="20"/>
+                <Label Content="热门兆赫" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Name="ct_UpTrendingChPanel" Orientation="Horizontal" Canvas.Left="105" Canvas.Top="8">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="#FF23B80B" Opacity="0.5"/>
+                </StackPanel.Background>
+                <Image Source="Images/UpTrending.png" Width="20" Height="20"/>
+                <Label Content="上升最快" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Name="ct_FavChPanel" Orientation="Horizontal" Canvas.Left="200" Canvas.Top="8">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="#FF0080FF" Opacity="0.5"/>
+                </StackPanel.Background>
+                <Image Source="Images/Favorite.png" Width="20" Height="20"/>
+                <Label Content="收藏" Foreground="White"/>
+            </StackPanel>
+            <TextBox Name="ct_chKeywordTextBox" Height="23" Canvas.Left="10" Canvas.Top="43" Width="185"/>
+            <StackPanel Name="ct_SearchChPanel" Orientation="Horizontal" Canvas.Left="200" Canvas.Top="40">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="#FF8C17DC" Opacity="0.5"/>
+                </StackPanel.Background>
+                <Image Source="Images/Search.png" Width="20" Height="20"/>
+                <Label Content="搜索" Foreground="White"/>
+            </StackPanel>
+            <ListBox Name="ct_channelListBox" Canvas.Left="10" Canvas.Top="70" BorderThickness="0" Width="260" Height="260" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" AlternationCount="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas Width="245" Height="45">
+                            <Image Name="ct_ChangeChannelImage" Source="{Binding Path=Cover}" Canvas.Left="0" Canvas.Top="0" Width="45" Height="45"/>
+                            <StackPanel Orientation="Horizontal" Canvas.Left="50" Canvas.Top="0" Width="190">
+                                <Label Content="{Binding Path=Name}" Foreground="White" FontSize="13" FontWeight="ExtraBlack"/>
+                                <Label Content="{Binding Path=Creator.Name}" Foreground="WhiteSmoke" FontSize="12"/>
+                                <Label Content="{Binding Path=SongsCount,Converter={StaticResource stringFormat}}" Foreground="LightGray" FontSize="12"/>
+                            </StackPanel>
+                            <Label Content="{Binding Path=HotSongs,Converter={StaticResource array2String}}" Canvas.Left="50" Canvas.Top="25" Foreground="Black" FontSize="11" MaxWidth="190"/>
+                            <!--<Image Source="Images/Favorite.png" Canvas.Right="0" Canvas.Top="12" Width="20" Height="20"/>-->
+                        </Canvas>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal" Canvas.Top="335" Canvas.Left="100">
+                <Image Name="ct_PrePageImage" Source="Images/Left.png" Width="20" Height="20" IsEnabled="False" Opacity="0.2"/>
+                <Label Name="ct_CurrentPage" Width="40" Foreground="White" FontSize="12" Content="1" HorizontalContentAlignment="Center"/>
+                <Image Name="ct_NextPageImage" Source="Images/Right.png" Width="20" Height="20" IsEnabled="False" Opacity="0.2"/>
+            </StackPanel>
+        </Canvas>
+        <!--播放列表界面-->
+        <Canvas Name="PlayListPanel" Grid.Row="1" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.2"/>
+            </Canvas.Background>
+            <ListBox Name="playListBox" Canvas.Left="10" Canvas.Top="10" BorderThickness="0" Width="260" Height="340" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" AlternationCount="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas Width="230" Height="43">
+                            <Label Content="{Binding Path=SongName}" Canvas.Left="0" Canvas.Top="0" Width="200" Foreground="White" FontSize="12" FontWeight="ExtraBlack"/>
+                            <StackPanel Orientation="Horizontal" Canvas.Left="0" Canvas.Top="21" Width="200">
+                                <Label Content="{Binding Path=SingerName}" Foreground="Black" FontSize="11"/>
+                                <Label Content="{Binding Path=PublishTime}" Foreground="Black" FontSize="11"/>
+                                <Label Content="{Binding Path=AlbumName}" Foreground="Black" FontSize="11"/>
+                            </StackPanel>
+                            <Image Source="{Binding Path=IsLiked,Converter={StaticResource isLike2Image}}" Canvas.Right="0" Canvas.Top="12" Width="20" Height="20"/>
+                        </Canvas>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Canvas>
+        <Canvas Name="PauseCanvas" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.2"/>
+            </Canvas.Background>
+            <Label Content="点击继续播放" Canvas.Left="70" Canvas.Top="160" Foreground="White" FontSize="18" FontWeight="ExtraBold"/>
+        </Canvas>
+    </Grid>
+</Window>
