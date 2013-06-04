@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Doubanfmapi by justplus</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Doubanfmapi</h1>
+        <p>豆瓣电台API和demo</p>
+        <p class="view"><a href="https://github.com/justplus/doubanFMAPI">View the Project on GitHub <small>justplus/doubanFMAPI</small></a></p>
+        <ul>
+          <li><a href="https://github.com/justplus/doubanFMAPI/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/justplus/doubanFMAPI/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/justplus/doubanFMAPI">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="doubanfmapi" class="anchor" href="#doubanfmapi"><span class="octicon octicon-link"></span></a>doubanFMAPI</h1>
+
+<p>豆瓣电台API和demo</p>
+
+<pre><code>更多API操作见源码API.cs
+目前豆瓣FM新增在线收藏列表，而此API中仍是本地存储，因此部分内容请先自行修改！
+demo bug反馈justplus AT ahu.edu.cn
+</code></pre>
+
+<h3>
+<a name="fm-api" class="anchor" href="#fm-api"><span class="octicon octicon-link"></span></a>豆瓣FM API</h3>
+
+<blockquote>
+<p>获取API对象(单例模式)</p>
+
+<blockquote>
+<p>API api = API.GetInstance()</p>
+</blockquote>
+
+<p>登录相关</p>
+
+<blockquote>
+<p>获取/刷新登录页验证码</p>
+
+<blockquote>
+<p>string captchaString = api.UpdateCaptcha()</p>
+</blockquote>
+
+<p>用户登录</p>
+
+<blockquote>
+<p>api.Login(string userName, string password, string captcha, bool remember = true)</p>
+</blockquote>
+
+<p>判断用户是否已登录 //返回值说明：-1：网络连接出错 0：未登录 1：已登录</p>
+
+<blockquote>
+<p>int loginState = api.HasLogined()</p>
+</blockquote>
+
+<p>获取登录用户信息</p>
+
+<blockquote>
+<p>api.GetLoginedUserInfo()</p>
+</blockquote>
+
+<p>注销登录</p>
+
+<blockquote>
+<p>api.Logout()</p>
+</blockquote>
+
+<p>登录完成事件</p>
+
+<blockquote>
+<p>api.loginCompletedEvent += loginInfo =&gt; {}</p>
+</blockquote>
+</blockquote>
+
+<p>歌曲相关</p>
+
+<blockquote>
+<p>获取新的播放列表 //适用于新打开软件或者切换兆赫时</p>
+
+<blockquote>
+<p>api.GetNewPlayList(int channelID, string songID = "", double SongPT = 0.0)</p>
+</blockquote>
+
+<p>为歌曲标注红心</p>
+
+<blockquote>
+<p>api.Like(int channelID, string songID, double songPT)</p>
+</blockquote>
+
+<p>取消已经标注的红心</p>
+
+<blockquote>
+<p>api.UnLike(int channelID, string songID, double songPT)</p>
+</blockquote>
+
+<p>不再播放当前歌曲</p>
+
+<blockquote>
+<p>api.Ban(int channelID, string songID, double songPT)</p>
+</blockquote>
+
+<p>跳过当前歌曲</p>
+
+<blockquote>
+<p>api.Next(int channelID, string songID, double songPT)</p>
+</blockquote>
+
+<p>歌曲自然结束</p>
+
+<blockquote>
+<p>api.NaturalEnd(int channelID, string songID, double songPT)</p>
+</blockquote>
+
+<p>播放列表更改事件</p>
+
+<blockquote>
+<p>api.playListChangedEvent += newPlaylist =&gt; {}</p>
+</blockquote>
+
+<p>播放列表加载失败事件</p>
+
+<blockquote>
+<p>api.playListLoadFailedEvent += () =&gt; {}</p>
+</blockquote>
+
+<p>歌曲切换事件</p>
+
+<blockquote>
+<p>api.currentSongChangedEvent += newSong =&gt; {}</p>
+</blockquote>
+
+<p>播放列表为空事件</p>
+
+<blockquote>
+<p>api.playListEmptyedEvent += () =&gt; {}</p>
+</blockquote>
+</blockquote>
+
+<p>兆赫相关</p>
+
+<blockquote>
+<p>获取初始兆赫</p>
+
+<blockquote>
+<p>ChannelEntity channels = api.GetInitChannel(bool logined)</p>
+</blockquote>
+
+<p>获取热门兆赫</p>
+
+<blockquote>
+<p>api.GetHotChannels(int start, int limit)</p>
+</blockquote>
+
+<p>获取上升最快兆赫列表</p>
+
+<blockquote>
+<p>api.GetUpTrendingChannels(int start, int limit)</p>
+</blockquote>
+
+<p>搜索兆赫</p>
+
+<blockquote>
+<p>api.GetSearchChannels(string keyword, int start, int limit)</p>
+</blockquote>
+
+<p>获取用户收藏的兆赫列表</p>
+
+<blockquote>
+<p>api.GetFavoriateChannels(string userName)</p>
+</blockquote>
+
+<p>判断某兆赫是否在收藏列表中</p>
+
+<blockquote>
+<p>bool isFav = api.IsFavorite(string userName, int channelID)</p>
+</blockquote>
+
+<p>添加兆赫到收藏列表</p>
+
+<blockquote>
+<p>api.AddToFavoriateChannels(string userName, ChannelEntity channel)</p>
+</blockquote>
+
+<p>从收藏列表中移除兆赫</p>
+
+<blockquote>
+<p>api.RemoveFromFavoriateChannels(string userName, int channelID)</p>
+</blockquote>
+
+<p>兆赫变更事件</p>
+
+<blockquote>
+<p>api.channelChangedEvent += channelInfo {}</p>
+</blockquote>
+
+<p>兆赫加载失败事件</p>
+
+<blockquote>
+<p>api.channelLoadFailedEvent += () {}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<p><img src="http://justplus-picture.stor.sinaapp.com/backup/doubanFM.png" alt="github" title="doubanFM"></p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/justplus">justplus</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
