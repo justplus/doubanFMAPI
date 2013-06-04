@@ -3,6 +3,10 @@ doubanFMAPI
 
 豆瓣电台API和demo
 
+    更多API操作见源码API.cs
+    目前豆瓣FM新增在线收藏列表，而此API中仍是本地存储，因此部分内容请先自行修改！
+    demo bug反馈justplus AT ahu.edu.cn
+    
 ### 豆瓣FM API
 > 获取API对象(单例模式)
 > > API api = API.GetInstance()
@@ -88,6 +92,5 @@ doubanFMAPI
 > > 兆赫加载失败事件
 > > > api.channelLoadFailedEvent += () {}
 
-    更多API操作见源码API.cs
-    目前豆瓣FM新增在线收藏列表，而此API中仍是本地存储，因此部分内容请先自行修改！
-    demo bug反馈justplus AT ahu.edu.cn
+
+![github](http://justplus-picture.stor.sinaapp.com/backup/doubanFM.png "doubanFM")
